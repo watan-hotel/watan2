@@ -30,21 +30,25 @@
 
   header {
     text-align: center;
-    padding: 80px 20px 30px;
+    padding: 120px 20px 50px;
     position: relative;
     z-index: 2;
   }
-  h1 {
-    font-size: 4em;
+  .main-title {
+    font-size: 6em;
     color: gold;
-    margin: 0;
-    letter-spacing: 2px;
+    font-weight: 600;
+    letter-spacing: 3px;
+  }
+  .main-title span {
+    color: #fff;
+    font-weight: 400;
   }
   h2 {
     font-weight: 400;
     color: #ccc;
-    margin: 10px 0 0 0;
-    font-size: 1.5em;
+    margin: 20px 0 0 0;
+    font-size: 1.7em;
   }
 
   .slideshow {
@@ -140,8 +144,8 @@
 <button class="lang-toggle" onclick="toggleLang()">عربي</button>
 
 <header>
-  <h1 id="title-en">Watan Holdings</h1>
-  <h1 id="title-ar" style="display:none;">وطن القابضة</h1>
+  <div id="title-en" class="main-title">Watan Holdings <span>| وطن القابضة</span></div>
+  <div id="title-ar" class="main-title" style="display:none;">وطن القابضة <span>| Watan Holdings</span></div>
   <h2 id="subtitle-en">Commercial & Residential Project – Dammam</h2>
   <h2 id="subtitle-ar" style="display:none;">مشروع تجاري وسكني – الدمام</h2>
 </header>
