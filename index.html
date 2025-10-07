@@ -1,167 +1,212 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Watan Holding — وطن القابضة</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Tajawal:wght@300;400;700&display=swap" rel="stylesheet">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Watan Holdings – Commercial & Residential Project</title>
 <style>
-  :root{
-    --gold:#b8872a;--muted:#9aa0a6;--bg:#0b0b0b;--card:rgba(255,255,255,0.04);--max:1200px;
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #000;
+    color: #f8f8f8;
+    overflow-x: hidden;
   }
-  *{box-sizing:border-box}
-  html,body{height:100%;margin:0;font-family:'Poppins',system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;background:var(--bg);color:#fff;}
-  a{color:var(--gold);text-decoration:none}
-  .container{max-width:var(--max);margin:0 auto;padding:0 20px}
 
-  /* NAV */
-  .nav{
-    position:fixed;left:0;right:0;top:0;z-index:60;
-    backdrop-filter:blur(6px);
-    background:linear-gradient(180deg,rgba(3,3,3,0.6),rgba(3,3,3,0.35));
-    border-bottom:1px solid rgba(255,255,255,0.03);
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(255,215,0,0.08) 0%, transparent 70%);
+    animation: shimmer 6s infinite alternate;
+    z-index: 0;
   }
-  .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px;max-width:var(--max);margin:0 auto}
-  .brand{display:flex;align-items:center;gap:14px}
-  .brand img{height:54px;width:auto;border-radius:8px;object-fit:contain;}
-  .brand-text{display:flex;flex-direction:column;line-height:1.1}
-  .brand-text .en{font-weight:700;font-size:1.2rem}
-  .brand-text .ar{font-family:'Tajawal',sans-serif;font-weight:700;color:var(--gold);font-size:1rem}
-
-  /* NAV links + language */
-  .nav-right{display:flex;align-items:center;gap:20px}
-  .nav-links{display:flex;gap:18px;font-size:15px;color:var(--muted)}
-  .nav-links a:hover{color:var(--gold)}
-  .lang-toggle{
-    background:transparent;border:1px solid rgba(255,255,255,0.06);
-    color:#fff;padding:8px 14px;border-radius:999px;cursor:pointer;
-    font-weight:600;transition:background 0.3s;
+  @keyframes shimmer {
+    from { opacity: 0.3; transform: scale(1);}
+    to { opacity: 0.7; transform: scale(1.2);}
   }
-  .lang-toggle:hover{background:rgba(255,255,255,0.08)}
 
-  /* HERO */
-  .hero{position:relative;height:88vh;min-height:540px;overflow:hidden;display:flex;align-items:center;justify-content:center}
-  .slide{position:absolute;inset:0;overflow:hidden;display:block;opacity:0;transform:scale(1.06);transition:opacity 1200ms ease-in-out,transform 6000ms ease-in-out}
-  .slide.active{opacity:1;transform:scale(1)}
-  .slide img{width:100%;height:100%;object-fit:cover;display:block}
-  .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.15) 0%,rgba(0,0,0,0.6) 65%);z-index:2;display:flex;align-items:center;justify-content:center;padding:28px;}
-  .hero-content{max-width:1100px;color:#fff;text-align:left;padding:6vw;z-index:3}
-  .hero-title{font-size:clamp(28px,5.6vw,56px);line-height:1.02;margin:0;font-weight:800;color:var(--gold)}
-  .hero-sub{margin-top:16px;color:#e9e7e4;max-width:820px;font-size:1.05rem}
-  .hero-ctas{margin-top:20px;display:flex;gap:12px}
-  .btn{padding:12px 20px;border-radius:999px;font-weight:700;cursor:pointer;border:0}
-  .btn-primary{background:var(--gold);color:#0b0b0b}
-  .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.12);color:#fff}
+  header {
+    text-align: center;
+    padding: 80px 20px 30px;
+    position: relative;
+    z-index: 2;
+  }
+  h1 {
+    font-size: 4em;
+    color: gold;
+    margin: 0;
+    letter-spacing: 2px;
+  }
+  h2 {
+    font-weight: 400;
+    color: #ccc;
+    margin: 10px 0 0 0;
+    font-size: 1.5em;
+  }
 
-  .gold-overlay{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(circle at 20% 10%,rgba(184,135,42,0.06) 0%,transparent 18%),radial-gradient(circle at 80% 80%,rgba(184,135,42,0.03) 0%,transparent 20%);animation:shimmer 10s infinite alternate;mix-blend-mode:screen;}
-  @keyframes shimmer{from{transform:translateY(-8%) scale(1);}to{transform:translateY(6%) scale(1.02);}}
+  .slideshow {
+    position: relative;
+    width: 100%;
+    height: 80vh;
+    overflow: hidden;
+  }
+  .slideshow img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.1);
+    transition: opacity 2s ease, transform 6s ease;
+  }
+  .slideshow img.active {
+    opacity: 1;
+    transform: scale(1);
+  }
 
-  section{padding:72px 0;z-index:3;position:relative}
-  h2{font-size:28px;margin:0 0 12px 0;color:#fff}
-  p.lead{color:var(--muted);max-width:980px;margin-top:8px;line-height:1.7}
-  .partners{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
-  .card{background:var(--card);border-radius:14px;padding:18px;box-shadow:0 8px 30px rgba(0,0,0,0.6);color:#fff}
-  .card .role{font-size:13px;color:var(--muted)}
-  .card .name{margin-top:8px;font-weight:700}
-  .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
-  .gallery img{width:100%;height:200px;object-fit:cover;border-radius:12px;transition:transform .4s}
-  .gallery img:hover{transform:scale(1.03)}
-  .lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.85);z-index:9999}
-  .lightbox img{max-width:92%;max-height:90%;border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,0.8)}
-  .map-wrap{margin-top:18px;border-radius:12px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,0.6)}
-  .contact{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:12px;padding:28px;margin-top:18px;box-shadow:0 12px 40px rgba(0,0,0,0.55)}
-  .contact .ctas{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:12px}
-  .contact a{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#fff}
-  footer{padding:20px 0;color:var(--muted);text-align:center;margin-top:28px}
+  .content {
+    text-align: center;
+    padding: 60px 20px;
+    max-width: 800px;
+    margin: auto;
+    position: relative;
+    z-index: 2;
+  }
+  .content p {
+    color: #ccc;
+    font-size: 1.1em;
+    line-height: 1.7em;
+  }
 
-  @media(max-width:1000px){.partners{grid-template-columns:1fr}.gallery{grid-template-columns:repeat(2,1fr)}.hero-content{text-align:center}}
-  @media(max-width:600px){.gallery{grid-template-columns:repeat(1,1fr)}.hero-sub{font-size:0.95rem}}
+  .contact {
+    background: #111;
+    padding: 50px 20px;
+    text-align: center;
+    z-index: 2;
+    position: relative;
+  }
+  .contact h3 {
+    color: gold;
+    margin-bottom: 20px;
+  }
+  .buttons a {
+    display: inline-block;
+    margin: 8px;
+    padding: 12px 25px;
+    border: 1px solid gold;
+    border-radius: 30px;
+    text-decoration: none;
+    color: gold;
+    transition: 0.3s;
+  }
+  .buttons a:hover {
+    background: gold;
+    color: black;
+  }
 
-  .lang-en{display:inline}
-  .lang-ar{display:none}
-  body.arabic .lang-en{display:none}
-  body.arabic .lang-ar{display:inline}
-  body.arabic{direction:rtl}
-  body.arabic .hero-content{text-align:right}
-  body.arabic .nav-inner{direction:rtl}
-  body.arabic *{font-family:'Tajawal','Poppins',sans-serif}
+  iframe {
+    width: 90%;
+    max-width: 700px;
+    height: 400px;
+    border: 0;
+    margin-top: 30px;
+  }
+
+  .lang-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: gold;
+    color: black;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: bold;
+    z-index: 3;
+  }
+
+  [dir="rtl"] body {
+    font-family: 'Tajawal', sans-serif;
+  }
 </style>
 </head>
 
 <body>
-<!-- NAV -->
-<div class="nav">
-  <div class="nav-inner container">
-    <div class="brand">
-      <img src="images/LOGO.png" alt="Watan Holding Logo">
-      <div class="brand-text">
-        <div class="en">Watan Holding</div>
-        <div class="ar">وطن القابضة</div>
-      </div>
-    </div>
+<div class="overlay"></div>
+<button class="lang-toggle" onclick="toggleLang()">عربي</button>
 
-    <div class="nav-right">
-      <nav class="nav-links">
-        <a href="#about"><span class="lang-en">About</span><span class="lang-ar">عن المشروع</span></a>
-        <a href="#team"><span class="lang-en">Team</span><span class="lang-ar">فريق المشروع</span></a>
-        <a href="#gallery"><span class="lang-en">Gallery</span><span class="lang-ar">المعرض</span></a>
-        <a href="#location"><span class="lang-en">Location</span><span class="lang-ar">الموقع</span></a>
-        <a href="#contact"><span class="lang-en">Contact</span><span class="lang-ar">اتصل بنا</span></a>
-      </nav>
-      <button class="lang-toggle" id="langToggle">العربية</button>
-    </div>
-  </div>
-</div>
-
-<div class="gold-overlay" aria-hidden="true"></div>
-
-<!-- HERO -->
-<header class="hero" id="home">
-  <div class="slide active"><img src="images/watan1.jfif" alt="Watan project 1"></div>
-  <div class="slide"><img src="images/watan2.jfif" alt="Watan project 2"></div>
-  <div class="slide"><img src="images/watan3.jfif" alt="Watan project 3"></div>
-  <div class="slide"><img src="images/watan4.jfif" alt="Watan project 4"></div>
-
-  <div class="hero-overlay">
-    <div class="hero-content container">
-      <div class="hero-title"><span class="lang-en">Watan Residences & Commercial</span><span class="lang-ar">مشروع وطن السكني والتجاري</span></div>
-      <div class="hero-sub"><span class="lang-en">A premier mixed-use development combining commercial elegance with residential comfort.</span><span class="lang-ar">مشروع متعدد الاستخدامات يجمع بين أناقة المساحات التجارية وراحة الوحدات السكنية.</span></div>
-      <div class="hero-ctas">
-        <button class="btn btn-primary" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})"><span class="lang-en">Contact Us</span><span class="lang-ar">اتصل الآن</span></button>
-        <a class="btn btn-ghost" href="#gallery"><span class="lang-en">View Gallery</span><span class="lang-ar">عرض المعرض</span></a>
-      </div>
-    </div>
-  </div>
+<header>
+  <h1 id="title-en">Watan Holdings</h1>
+  <h1 id="title-ar" style="display:none;">وطن القابضة</h1>
+  <h2 id="subtitle-en">Commercial & Residential Project – Dammam</h2>
+  <h2 id="subtitle-ar" style="display:none;">مشروع تجاري وسكني – الدمام</h2>
 </header>
 
-<!-- (Other sections remain identical from your working version) -->
+<div class="slideshow">
+  <img src="https://raw.githubusercontent.com/watan-hotel/watan2/main/images/watan1.jfif" class="active" />
+  <img src="https://raw.githubusercontent.com/watan-hotel/watan2/main/images/watan2.jfif" />
+  <img src="https://raw.githubusercontent.com/watan-hotel/watan2/main/images/watan3.jfif" />
+  <img src="https://raw.githubusercontent.com/watan-hotel/watan2/main/images/watan4.jfif" />
+</div>
 
-<footer>
-  <div class="container">
-    <span class="lang-en">© <span id="year-en"></span> Watan Holding — All rights reserved</span>
-    <span class="lang-ar">© <span id="year-ar"></span> وطن القابضة — جميع الحقوق محفوظة</span>
+<div class="content">
+  <p id="desc-en">
+    A landmark mixed-use development in Dammam by <strong>Watan Holdings</strong>,
+    combining elegant residential apartments with premium commercial spaces.<br><br>
+    <strong>Owner:</strong> Altaher Alalawi<br>
+    <strong>Consultant:</strong> Emaar Gulf Engineering<br>
+    <strong>Contractor:</strong> Engineering Corner Contracting
+  </p>
+
+  <p id="desc-ar" style="display:none; direction:rtl; text-align:right;">
+    مشروع مميز متعدد الاستخدامات في مدينة الدمام من <strong>شركة وطن القابضة</strong>، يجمع بين الشقق السكنية الراقية والمساحات التجارية الفاخرة.<br><br>
+    <strong>المالك:</strong> الطاهر العلوي<br>
+    <strong>الاستشاري:</strong> إعمار الخليج للاستشارات الهندسية<br>
+    <strong>المقاول:</strong> ركن الهندسة للمقاولات
+  </p>
+</div>
+
+<div class="contact">
+  <h3 id="contact-title">Contact Us</h3>
+  <div class="buttons">
+    <a href="https://wa.me/966138414555" target="_blank">WhatsApp</a>
+    <a href="tel:+966138414555">Call</a>
+    <a href="mailto:info@wtanhotel.com">Email</a>
   </div>
-</footer>
 
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
-  <img id="lightboxImg" alt="Expanded project image">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d4276.625613001315!2d50.11538699999999!3d26.393210000000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjbCsDIzJzM1LjYiTiA1MMKwMDYnNTUuNCJF!5e1!3m2!1sen!2ssa!4v1759756729028!5m2!1sen!2ssa" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 </div>
 
 <script>
-const slides=Array.from(document.querySelectorAll('.slide'));let current=0;const slideDuration=4000;
-let slideTimer=setInterval(()=>{slides[current].classList.remove('active');current=(current+1)%slides.length;slides[current].classList.add('active');},slideDuration);
-const lightbox=document.getElementById('lightbox');const lbImg=document.getElementById('lightboxImg');
-function openLightbox(i){lbImg.src=slides[i].querySelector('img').src;lightbox.style.display='flex';}
-function closeLightbox(){lightbox.style.display='none';}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
+  // Slideshow rotation
+  const slides = document.querySelectorAll(".slideshow img");
+  let current = 0;
+  setInterval(() => {
+    slides[current].classList.remove("active");
+    current = (current + 1) % slides.length;
+    slides[current].classList.add("active");
+  }, 5000);
 
-const langToggle=document.getElementById('langToggle');
-function toArabicDigits(s){return s.replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]);}
-function updateYear(){const y=new Date().getFullYear();document.getElementById('year-en').textContent=y;document.getElementById('year-ar').textContent=toArabicDigits(String(y));}
-updateYear();
-langToggle.onclick=()=>{const ar=document.body.classList.toggle('arabic');langToggle.textContent=ar?'English':'العربية';document.documentElement.lang=ar?'ar':'en';document.documentElement.dir=ar?'rtl':'ltr';};
+  // Language toggle
+  let isArabic = false;
+  function toggleLang() {
+    isArabic = !isArabic;
+    document.getElementById("title-en").style.display = isArabic ? "none" : "block";
+    document.getElementById("subtitle-en").style.display = isArabic ? "none" : "block";
+    document.getElementById("desc-en").style.display = isArabic ? "none" : "block";
+    document.getElementById("contact-title").innerText = isArabic ? "تواصل معنا" : "Contact Us";
+
+    document.getElementById("title-ar").style.display = isArabic ? "block" : "none";
+    document.getElementById("subtitle-ar").style.display = isArabic ? "block" : "none";
+    document.getElementById("desc-ar").style.display = isArabic ? "block" : "none";
+
+    document.querySelector(".lang-toggle").innerText = isArabic ? "English" : "عربي";
+    document.body.dir = isArabic ? "rtl" : "ltr";
+  }
 </script>
 </body>
 </html>
