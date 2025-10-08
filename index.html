@@ -1,216 +1,180 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Watan Holdings – Commercial & Residential Project</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Watan Holdings — Watan Residences & Commercial</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Tajawal:wght@300;400;700&display=swap" rel="stylesheet">
+
 <style>
-  body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background-color: #000;
-    color: #f8f8f8;
-    overflow-x: hidden;
-  }
+:root{
+  --gold:#b8872a;--muted:#9aa0a6;--bg:#0b0b0b;--card:rgba(255,255,255,0.04);--max:1200px;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:'Poppins',sans-serif;background:var(--bg);color:#fff;}
+a{color:var(--gold);text-decoration:none}
+.container{max-width:var(--max);margin:0 auto;padding:0 20px}
 
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at center, rgba(255,215,0,0.08) 0%, transparent 70%);
-    animation: shimmer 6s infinite alternate;
-    z-index: 0;
-  }
-  @keyframes shimmer {
-    from { opacity: 0.3; transform: scale(1);}
-    to { opacity: 0.7; transform: scale(1.2);}
-  }
+/* NAV */
+.nav{
+  position:fixed;left:0;right:0;top:0;z-index:60;
+  backdrop-filter:blur(6px);
+  background:linear-gradient(180deg,rgba(3,3,3,0.6),rgba(3,3,3,0.35));
+  border-bottom:1px solid rgba(255,255,255,0.03);
+}
+.nav-inner{display:flex;align-items:center;justify-content:center;padding:14px 20px;max-width:var(--max);margin:0 auto}
+.brand{text-align:center}
+.brand-text{font-size:clamp(24px,5vw,42px);font-weight:800;color:var(--gold);display:flex;align-items:center;justify-content:center;gap:20px;}
+.brand-text span{font-family:'Tajawal',sans-serif;font-weight:700}
+.lang-toggle{
+  position:absolute;right:20px;top:16px;
+  background:transparent;border:1px solid rgba(255,255,255,0.06);color:#fff;
+  padding:8px 12px;border-radius:999px;cursor:pointer;font-weight:600
+}
 
-  header {
-    text-align: center;
-    padding: 120px 20px 50px;
-    position: relative;
-    z-index: 2;
-  }
-  .main-title {
-    font-size: 6em;
-    color: gold;
-    font-weight: 600;
-    letter-spacing: 3px;
-  }
-  .main-title span {
-    color: #fff;
-    font-weight: 400;
-  }
-  h2 {
-    font-weight: 400;
-    color: #ccc;
-    margin: 20px 0 0 0;
-    font-size: 1.7em;
-  }
+/* HERO SLIDESHOW */
+.hero{position:relative;height:88vh;min-height:540px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.slide{position:absolute;inset:0;overflow:hidden;opacity:0;transform:scale(1.06);transition:opacity 1200ms ease-in-out,transform 6000ms ease-in-out}
+.slide.active{opacity:1;transform:scale(1)}
+.slide img{width:100%;height:100%;object-fit:cover}
 
-  .slideshow {
-    position: relative;
-    width: 100%;
-    height: 80vh;
-    overflow: hidden;
-  }
-  .slideshow img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transform: scale(1.1);
-    transition: opacity 2s ease, transform 6s ease;
-  }
-  .slideshow img.active {
-    opacity: 1;
-    transform: scale(1);
-  }
+/* overlay */
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.2),rgba(0,0,0,0.65));z-index:2;display:flex;align-items:center;justify-content:center;padding:28px;}
+.hero-content{max-width:1000px;text-align:center;z-index:3;}
+.hero-title{font-size:clamp(30px,6vw,60px);font-weight:800;color:var(--gold);}
+.hero-sub{margin-top:16px;color:#e9e7e4;max-width:820px;font-size:1.05rem;margin:auto;}
+.hero-ctas{margin-top:20px;display:flex;gap:12px;justify-content:center;}
+.btn{padding:12px 20px;border-radius:999px;font-weight:700;cursor:pointer;border:0;}
+.btn-primary{background:var(--gold);color:#0b0b0b}
+.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.12);color:#fff}
 
-  .content {
-    text-align: center;
-    padding: 60px 20px;
-    max-width: 800px;
-    margin: auto;
-    position: relative;
-    z-index: 2;
-  }
-  .content p {
-    color: #ccc;
-    font-size: 1.1em;
-    line-height: 1.7em;
-  }
+/* shimmer background */
+.gold-overlay{
+  position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(circle at 20% 10%,rgba(184,135,42,0.06)0%,transparent18%),radial-gradient(circle at80%80%,rgba(184,135,42,0.03)0%,transparent20%);
+  animation:shimmer 10s infinite alternate;mix-blend-mode:screen;
+}
+@keyframes shimmer{from{transform:translateY(-8%)scale(1)}to{transform:translateY(6%)scale(1.02)}}
 
-  .contact {
-    background: #111;
-    padding: 50px 20px;
-    text-align: center;
-    z-index: 2;
-    position: relative;
-  }
-  .contact h3 {
-    color: gold;
-    margin-bottom: 20px;
-  }
-  .buttons a {
-    display: inline-block;
-    margin: 8px;
-    padding: 12px 25px;
-    border: 1px solid gold;
-    border-radius: 30px;
-    text-decoration: none;
-    color: gold;
-    transition: 0.3s;
-  }
-  .buttons a:hover {
-    background: gold;
-    color: black;
-  }
+/* sections */
+section{padding:72px 0;background:transparent;position:relative;z-index:3}
+h2{font-size:28px;margin:0 0 12px;color:#fff}
+p.lead{color:var(--muted);max-width:980px;margin-top:8px;line-height:1.7}
 
-  iframe {
-    width: 90%;
-    max-width: 700px;
-    height: 400px;
-    border: 0;
-    margin-top: 30px;
-  }
+/* gallery */
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
+.gallery img{width:100%;height:200px;object-fit:cover;border-radius:12px;transition:transform .4s}
+.gallery img:hover{transform:scale(1.03)}
 
-  .lang-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: gold;
-    color: black;
-    border: none;
-    border-radius: 20px;
-    padding: 8px 16px;
-    cursor: pointer;
-    font-weight: bold;
-    z-index: 3;
-  }
+/* map */
+.map-wrap{margin-top:18px;border-radius:12px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,0.6)}
+.map-wrap iframe{width:100%;height:420px;border:0;display:block}
 
-  [dir="rtl"] body {
-    font-family: 'Tajawal', sans-serif;
-  }
+/* contact */
+.contact{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:12px;padding:28px;margin-top:18px;box-shadow:0 12px 40px rgba(0,0,0,0.55);text-align:center;}
+.contact a{display:inline-block;margin:8px 10px;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);color:#fff}
+
+/* footer */
+footer{padding:20px 0;color:var(--muted);text-align:center;margin-top:28px}
+
+/* Language toggles */
+.lang-en{display:inline}
+.lang-ar{display:none}
+body.arabic .lang-en{display:none}
+body.arabic .lang-ar{display:inline}
+body.arabic{direction:rtl;font-family:'Tajawal',sans-serif;}
 </style>
 </head>
 
 <body>
-<div class="overlay"></div>
-<button class="lang-toggle" onclick="toggleLang()">عربي</button>
+<div class="nav">
+  <div class="nav-inner">
+    <div class="brand">
+      <div class="brand-text">
+        <span class="lang-en">Watan Holdings</span>
+        <span class="lang-ar">وطن القابضة</span>
+      </div>
+    </div>
+    <button class="lang-toggle" id="langToggle">العربية</button>
+  </div>
+</div>
 
-<header>
-  <div id="title-en" class="main-title">Watan Holdings <span>| وطن القابضة</span></div>
-  <div id="title-ar" class="main-title" style="display:none;">وطن القابضة <span>| Watan Holdings</span></div>
-  <h2 id="subtitle-en">Commercial & Residential Project – Dammam</h2>
-  <h2 id="subtitle-ar" style="display:none;">مشروع تجاري وسكني – الدمام</h2>
+<div class="gold-overlay" aria-hidden="true"></div>
+
+<header class="hero">
+  <div class="slide active"><img src="https://raw.githubusercontent.com/watan-hotel/watan2/main/images/watan1.jfif" alt=""></div>
+  <div class="slide"><img src="https://raw.githubusercontent.com/watan-hotel/watan2/main/images/watan2.jfif" alt=""></div>
+  <div class="slide"><img src="https://raw.githubusercontent.com/watan-hotel/watan2/main/images/watan3.jfif" alt=""></div>
+  <div class="slide"><img src="https://raw.githubusercontent.com/watan-hotel/watan2/main/images/watan4.jfif" alt=""></div>
+
+  <div class="hero-overlay">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        <span class="lang-en">Watan Residences & Commercial</span>
+        <span class="lang-ar">مشروع وطن السكني والتجاري</span>
+      </h1>
+      <p class="hero-sub">
+        <span class="lang-en">A premier mixed-use development combining commercial elegance with residential comfort.</span>
+        <span class="lang-ar">مشروع متعدد الاستخدامات يجمع بين أناقة المساحات التجارية وراحة الوحدات السكنية.</span>
+      </p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#contact"><span class="lang-en">Contact Us</span><span class="lang-ar">اتصل الآن</span></a>
+        <a class="btn btn-ghost" href="#gallery"><span class="lang-en">View Gallery</span><span class="lang-ar">عرض المعرض</span></a>
+      </div>
+    </div>
+  </div>
 </header>
 
-<div class="slideshow">
-  <img src="https://raw.githubusercontent.com/watan-hotel/watan2/main/images/watan1.jfif" class="active" />
-  <img src="https://raw.githubusercontent.com/watan-hotel/watan2/main/images/watan2.jfif" />
-  <img src="https://raw.githubusercontent.com/watan-hotel/watan2/main/images/watan3.jfif" />
-  <img src="https://raw.githubusercontent.com/watan-hotel/watan2/main/images/watan4.jfif" />
-</div>
-
-<div class="content">
-  <p id="desc-en">
-    A landmark mixed-use development in Dammam by <strong>Watan Holdings</strong>,
-    combining elegant residential apartments with premium commercial spaces.<br><br>
-    <strong>Owner:</strong> Altaher Alalawi<br>
-    <strong>Consultant:</strong> Emaar Gulf Engineering<br>
-    <strong>Contractor:</strong> Engineering Corner Contracting
-  </p>
-
-  <p id="desc-ar" style="display:none; direction:rtl; text-align:right;">
-    مشروع مميز متعدد الاستخدامات في مدينة الدمام من <strong>شركة وطن القابضة</strong>، يجمع بين الشقق السكنية الراقية والمساحات التجارية الفاخرة.<br><br>
-    <strong>المالك:</strong> الطاهر العلوي<br>
-    <strong>الاستشاري:</strong> إعمار الخليج للاستشارات الهندسية<br>
-    <strong>المقاول:</strong> ركن الهندسة للمقاولات
-  </p>
-</div>
-
-<div class="contact">
-  <h3 id="contact-title">Contact Us</h3>
-  <div class="buttons">
-    <a href="https://wa.me/966138414555" target="_blank">WhatsApp</a>
-    <a href="tel:+966138414555">Call</a>
-    <a href="mailto:info@wtanhotel.com">Email</a>
+<section id="gallery">
+  <div class="container">
+    <h2><span class="lang-en">Gallery</span><span class="lang-ar">المعرض</span></h2>
+    <div class="gallery">
+      <img src="https://raw.githubusercontent.com/watan-hotel/watan2/main/images/watan1.jfif" alt="">
+      <img src="https://raw.githubusercontent.com/watan-hotel/watan2/main/images/watan2.jfif" alt="">
+      <img src="https://raw.githubusercontent.com/watan-hotel/watan2/main/images/watan3.jfif" alt="">
+      <img src="https://raw.githubusercontent.com/watan-hotel/watan2/main/images/watan4.jfif" alt="">
+    </div>
   </div>
+</section>
 
-  <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d4276.625613001315!2d50.11538699999999!3d26.393210000000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjbCsDIzJzM1LjYiTiA1MMKwMDYnNTUuNCJF!5e1!3m2!1sen!2ssa!4v1759756729028!5m2!1sen!2ssa" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-</div>
+<section id="location">
+  <div class="container">
+    <h2><span class="lang-en">Location</span><span class="lang-ar">الموقع</span></h2>
+    <div class="map-wrap">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d4276.625613001315!2d50.11538699999999!3d26.393210000000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjbCsDIzJzM1LjYiTiA1MMKwMDYnNTUuNCJF!5e1!3m2!1sen!2ssa!4v1759756729028!5m2!1sen!2ssa" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <h2><span class="lang-en">Contact</span><span class="lang-ar">اتصل بنا</span></h2>
+    <div class="contact">
+      <a href="https://wa.me/966138414555" target="_blank"><span class="lang-en">WhatsApp +966 13 841 4555</span><span class="lang-ar">واتساب +٩٦٦ ١٣ ٨٤١ ٤٥٥٥</span></a>
+      <a href="tel:+966138414555"><span class="lang-en">Call +966 13 841 4555</span><span class="lang-ar">اتصال +٩٦٦ ١٣ ٨٤١ ٤٥٥٥</span></a>
+      <a href="mailto:info@wtanhotel.com"><span class="lang-en">Email info@wtanhotel.com</span><span class="lang-ar">البريد الإلكتروني info@wtanhotel.com</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="lang-en">© <span id="year-en"></span> Watan Holdings — All rights reserved</span>
+  <span class="lang-ar">© <span id="year-ar"></span> شركة وطن القابضة — جميع الحقوق محفوظة</span>
+</footer>
 
 <script>
-  // Slideshow rotation
-  const slides = document.querySelectorAll(".slideshow img");
-  let current = 0;
-  setInterval(() => {
-    slides[current].classList.remove("active");
-    current = (current + 1) % slides.length;
-    slides[current].classList.add("active");
-  }, 5000);
+/* Slideshow */
+const slides=document.querySelectorAll('.slide');let i=0;
+setInterval(()=>{slides[i].classList.remove('active');i=(i+1)%slides.length;slides[i].classList.add('active');},4000);
 
-  // Language toggle
-  let isArabic = false;
-  function toggleLang() {
-    isArabic = !isArabic;
-    document.getElementById("title-en").style.display = isArabic ? "none" : "block";
-    document.getElementById("subtitle-en").style.display = isArabic ? "none" : "block";
-    document.getElementById("desc-en").style.display = isArabic ? "none" : "block";
-    document.getElementById("contact-title").innerText = isArabic ? "تواصل معنا" : "Contact Us";
-
-    document.getElementById("title-ar").style.display = isArabic ? "block" : "none";
-    document.getElementById("subtitle-ar").style.display = isArabic ? "block" : "none";
-    document.getElementById("desc-ar").style.display = isArabic ? "block" : "none";
-
-    document.querySelector(".lang-toggle").innerText = isArabic ? "English" : "عربي";
-    document.body.dir = isArabic ? "rtl" : "ltr";
-  }
+/* Language toggle */
+const toggle=document.getElementById('langToggle');
+toggle.onclick=()=>{document.body.classList.toggle('arabic');toggle.textContent=document.body.classList.contains('arabic')?'English':'العربية';}
+const year=new Date().getFullYear();
+document.getElementById('year-en').textContent=year;
+document.getElementById('year-ar').textContent=year.toString().replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);
 </script>
 </body>
 </html>
